@@ -1,0 +1,48 @@
+<form class="form-designer js-search-form">
+  <input class="form-image" name="image" type="file" accept="image/*" />
+
+  <div class="wrapper">
+    <ul class="form-list">
+      <li class="form-item">
+        <input
+          class="heading"
+          type="text"
+          name="heading"
+          id="heading"
+          placeholder="Заголовок"
+          maxlength="21"
+          pattern="^[А-Яа-яЁё\s]+$"
+        />
+        <label class="label-heading" for="heading"></label>
+      </li>
+      <li class="form-item">
+        <input type="url" class="link" name="link" id="link" placeholder="Силка" />
+        <label class="label-link" for="link"></label>
+      </li>
+      <li class="form-item">
+        <textarea
+          class="text"
+          name="textarea"
+          id="textarea"
+          placeholder="Текст"
+          maxlength="250"
+        ></textarea>
+        <label class="label-text" for="textarea"></label>
+      </li>
+    </ul>
+
+    <button class="from-btn" type="button">Создать</button>
+  </div>
+</form>
+<div class="box">
+  <ul class="box-list"></ul>
+</div>
+<button type="button" class="btn btn-primary button" data-action="load-more">
+  <span
+    class="spinner-border spinner-border-sm spinner is-hidden"
+    role="status"
+    aria-hidden="true"
+  ></span>
+  <span class="label">Показать ещё</span>
+</button>
+<button class="load-more is-hiden" type="button">Загрузити ще</button>

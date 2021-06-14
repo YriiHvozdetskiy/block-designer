@@ -1,0 +1,109 @@
+.form-designer {
+  width: 800px;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 10px;
+  display: flex;
+  background-color: rgba(grey, 0.1);
+}
+
+.form-item > input,
+textarea {
+  border: none;
+  width: 100%;
+  background-color: rgba(grey, 0.3);
+}
+
+.form-image {
+  width: 600px;
+  height: 240px;
+  margin-right: 10px;
+  background-color: rgba(grey, 0.3);
+}
+
+.from-btn {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 200px;
+  margin-left: auto;
+  padding: 5px 10px;
+  border: none;
+  background-color: rgba(grey, 0.3);
+}
+
+.text {
+  height: 120px;
+  resize: none;
+}
+
+.wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+}
+
+.box-list {
+  width: 870px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: -10px;
+}
+
+.box-item {
+  padding: 10px;
+  margin: 10px;
+  background-color: rgba(grey, 0.1);
+}
+
+.container-image {
+  width: 250px;
+  height: 250px;
+  background-color: rgba(grey, 0.3);
+}
+
+.container-list {
+  height: 100px;
+  padding: 10px;
+}
+
+.container-item {
+  color: black;
+}
+
+.load-more.is-hiden {
+  display: none;
+}
+
+.load-more {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  width: 200px;
+  padding: 5px 10px;
+  border: none;
+  background-color: rgba(128, 128, 128, 0.3);
+}
+
+// ==========
+.button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.button.is-hidden {
+  display: none;
+}
+
+.button > .spinner.is-hidden {
+  display: none;
+}
