@@ -26,27 +26,6 @@ const loadMoreBtn = new LoadMoreBtn({
   hidden: true,
 });
 
-let counter = 0;
-
-const textLength = {
-  isHeadingValidLength(value) {
-    if (value.length > 20) {
-      return myError({
-        text: 'В заголовку максимум 20 символів',
-        delay: 3500,
-      });
-    }
-  },
-  isTextValidLength(value) {
-    if (value.length > 250) {
-      return myError({
-        text: 'В тексті максимум 250 символів',
-        delay: 3500,
-      });
-    }
-  },
-};
-
 function isTextValid(value) {
   const cyrillicPattern = /^[\u0400-\u04FF]+$/;
   return cyrillicPattern.test(value);
@@ -95,6 +74,11 @@ function formDataCollection() {
 `;
 
   refs.boxList.insertAdjacentHTML('beforeend', el);
+
+  if (refs.boxList.children.length > 10) {
+    showLoadMoreBtn();
+    refs.loadMore.scrollIntoView({ behavior: 'smooth' });
+  }
 }
 
 function onForm(e) {
@@ -102,24 +86,10 @@ function onForm(e) {
     return;
   }
 
-  const headingValue = refs.heading.value;
-  const textValue = refs.text.value;
-
-  textLength.isHeadingValidLength(headingValue);
-  textLength.isTextValidLength(textValue);
-
   if (!formDataCollection()) e.currentTarget.reset();
 
   loadMoreBtn.show();
   loadMoreBtn.disable();
-
-  counter += 1;
-
-  if (counter > 10) {
-    showLoadMoreBtn();
-    refs.loadMore.scrollIntoView({ behavior: 'smooth' });
-    return;
-  }
 
   loadMoreBtn.hide();
 }
