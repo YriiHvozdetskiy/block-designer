@@ -3,8 +3,6 @@ import '@pnotify/core/dist/BrightTheme.css';
 import '@pnotify/core/dist/Material.css';
 import '@pnotify/core/dist/PNotify.css';
 
-import LoadMoreBtn from './load-more-btn';
-
 const refs = {
   fromBtn: document.querySelector('.from-btn'),
   form: document.querySelector('.form-designer'),
@@ -12,19 +10,13 @@ const refs = {
   heading: document.querySelector('.heading'),
   link: document.querySelector('.link'),
   text: document.querySelector('.text'),
-  loadMore: document.querySelector('.load-more'),
   boxList: document.querySelector('.box-list'),
+  loader: document.querySelector('.loading-2--full-height'),
 };
 
 const myError = error;
 
 refs.form.addEventListener('click', onForm);
-refs.loadMore.addEventListener('click', onLoadMoreBtn);
-
-const loadMoreBtn = new LoadMoreBtn({
-  selector: '[data-action="load-more"]',
-  hidden: true,
-});
 
 function isTextValid(value) {
   const cyrillicPattern = /^[\u0400-\u04FF]+$/;
@@ -77,7 +69,6 @@ function formDataCollection() {
 
   if (refs.boxList.children.length > 10 && refs.boxList.children.length < 12) {
     showLoadMoreBtn();
-    // refs.loadMore.scrollIntoView({ behavior: 'smooth' });
   }
 }
 
@@ -86,16 +77,12 @@ function onForm(e) {
     return;
   }
 
+  refs.loader.classList.add('loading-2');
   // if (!formDataCollection()) e.currentTarget.reset();
   formDataCollection();
-
-  loadMoreBtn.show();
-  loadMoreBtn.disable();
-
-  loadMoreBtn.hide();
+  refs.loader.classList.remove('loading-2');
 }
 
 function showLoadMoreBtn() {
-  loadMoreBtn.hide();
   refs.loadMore.classList.remove('is-hiden');
 }
