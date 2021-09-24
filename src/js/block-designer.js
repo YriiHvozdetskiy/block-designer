@@ -57,12 +57,14 @@ function formDataCollection() {
   const textValue = refs.text.value;
   const linkValue = refs.link.value;
 
-  if (headingValue === '' || linkValue === '' || textValue === '') {
-    return myError({
-      text: 'Ведіть всі дані',
-      delay: 3500,
-    });
-  }
+  if (headingValue === '')
+    return myError({ text: 'Ведені не всі дані. Поле заговолок пусте', delay: 3500 });
+
+  if (linkValue === '')
+    return myError({ text: 'Ведені не всі дані. Поле силка пусте', delay: 3500 });
+
+  if (textValue === '')
+    return myError({ text: 'Ведені не всі дані. Поле текст пусте', delay: 3500 });
 
   if (!isTextValid(headingValue)) {
     return myError({
@@ -104,9 +106,7 @@ function onForm(e) {
   textLength.isHeadingValidLength(headingValue);
   textLength.isTextValidLength(textValue);
 
-  formDataCollection();
-
-  e.currentTarget.reset();
+  if (!formDataCollection()) e.currentTarget.reset();
 
   loadMoreBtn.show();
   loadMoreBtn.disable();
