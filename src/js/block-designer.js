@@ -83,7 +83,9 @@ function formDataCollection() {
   const el = `
   <li class="box-item">
      <a href="${linkValue}" class="box-link">
-        <div class="container-image"></div>
+        <div class="container-image">
+         <img src="" alt="">
+        </div>
             <ul class="container-list">
                 <li class="container-item">${headingValue}</li>
                  <li class="container-item">${textValue}</li>
