@@ -75,9 +75,9 @@ function formDataCollection() {
 
   refs.boxList.insertAdjacentHTML('beforeend', el);
 
-  if (refs.boxList.children.length > 10) {
+  if (refs.boxList.children.length > 10 && refs.boxList.children.length < 12) {
     showLoadMoreBtn();
-    refs.loadMore.scrollIntoView({ behavior: 'smooth' });
+    // refs.loadMore.scrollIntoView({ behavior: 'smooth' });
   }
 }
 
@@ -86,31 +86,13 @@ function onForm(e) {
     return;
   }
 
-  if (!formDataCollection()) e.currentTarget.reset();
+  // if (!formDataCollection()) e.currentTarget.reset();
+  formDataCollection();
 
   loadMoreBtn.show();
   loadMoreBtn.disable();
 
   loadMoreBtn.hide();
-}
-
-function onLoadMoreBtn() {
-  const el = `
-  <li class="box-item">
-     <a href="#" class="box-link">
-        <div class="container-image"></div>
-            <ul class="container-list">
-                <li class="container-item">Заголовок</li>
-                <li class="container-item">Текст</li>
-            </ul>
-     </a>
-  </li>`;
-
-  for (let i = 0; i < 10; i++) {
-    refs.boxList.insertAdjacentHTML('beforeend', el);
-  }
-
-  refs.loadMore.scrollIntoView({ behavior: 'smooth' });
 }
 
 function showLoadMoreBtn() {
