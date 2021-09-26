@@ -136,6 +136,5 @@ const clearForm = () => {
   refs.heading.value = '';
   refs.link.value = '';
   refs.text.value = '';
-  // зробити нормально
   refs.imageDisplay.src = ' ';
 };
