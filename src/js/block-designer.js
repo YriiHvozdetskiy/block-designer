@@ -15,6 +15,7 @@ const refs = {
   loader: document.querySelector('.loading-2--full-height'),
   imgWrapper: document.querySelector('.image-wrapper'),
   imageDisplay: document.querySelector('.image-display'),
+  loadMore: document.querySelector('.load-more'),
 };
 
 const myError = error;
@@ -100,7 +101,7 @@ function onForm(e) {
 
   refs.loader.classList.add('loading-2');
   formDataCollection();
-  if (isValidForm) clearForm();
+  // if (isValidForm) clearForm();
   refs.loader.classList.remove('loading-2');
 }
 
