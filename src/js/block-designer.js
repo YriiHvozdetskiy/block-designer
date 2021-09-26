@@ -24,7 +24,7 @@ refs.form.addEventListener('click', onForm);
 refs.imageInput.addEventListener('change', onImageInput);
 
 function isTextValid(value) {
-  const cyrillicPattern = /^[\u0400-\u04FF]+$/;
+  const cyrillicPattern = /^[\u0400-\u04FF]/iu;
   return cyrillicPattern.test(value);
 }
 
@@ -33,8 +33,6 @@ let uploadedImage = '';
 function onImageInput() {
   const reader = new FileReader();
   reader.addEventListener('load', () => {
-    console.log('reader', reader);
-
     uploadedImage = reader.result;
     refs.imageDisplay.src = uploadedImage;
   });
@@ -47,6 +45,7 @@ function formDataCollection() {
   const headingValue = refs.heading.value;
   const textValue = refs.text.value;
   const linkValue = refs.link.value;
+  isValidForm = false;
 
   if (headingValue === '')
     return myError({ text: 'Ведені не всі дані. Поле заговолок пусте', delay: 3500 });
@@ -71,6 +70,26 @@ function formDataCollection() {
     });
   }
 
+  if (refs.boxList.children.length > 9) {
+    const el = `
+  <li class="box-item is-hiden">
+     <a href="${linkValue}" class="box-link">
+        <div class="container-image">
+         <img src="${uploadedImage}" alt="">
+        </div>
+            <ul class="container-list">
+                <li class="container-item">${headingValue}</li>
+                 <li class="container-item">${textValue}</li>
+             </ul>
+     </a>
+  </li>
+`;
+    refs.boxList.insertAdjacentHTML('beforeend', el);
+    showLoadMoreBtn();
+    isValidForm = true;
+    return;
+  }
+
   const el = `
   <li class="box-item">
      <a href="${linkValue}" class="box-link">
@@ -86,12 +105,7 @@ function formDataCollection() {
 `;
 
   refs.boxList.insertAdjacentHTML('beforeend', el);
-
   isValidForm = true;
-
-  if (refs.boxList.children.length > 10 && refs.boxList.children.length < 12) {
-    showLoadMoreBtn();
-  }
 }
 
 function onForm(e) {
@@ -101,12 +115,20 @@ function onForm(e) {
 
   refs.loader.classList.add('loading-2');
   formDataCollection();
-  // if (isValidForm) clearForm();
+  if (isValidForm) clearForm();
   refs.loader.classList.remove('loading-2');
 }
 
 function showLoadMoreBtn() {
   refs.loadMore.classList.remove('is-hiden');
+  refs.loadMore.addEventListener('click', onLoadMore);
+}
+
+function onLoadMore() {
+  const boxItem = document.querySelectorAll('.box-item.is-hiden');
+  for (let i = 0; i < 10; i += 1) {
+    boxItem[i].classList.remove('is-hiden');
+  }
 }
 
 const clearForm = () => {
