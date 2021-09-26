@@ -70,6 +70,7 @@ function formDataCollection() {
     });
   }
 
+  if (refs.boxList.children.length === 10) showLoadMoreBtn();
   if (refs.boxList.children.length > 9) {
     const el = `
   <li class="box-item is-hiden">
@@ -85,8 +86,8 @@ function formDataCollection() {
   </li>
 `;
     refs.boxList.insertAdjacentHTML('beforeend', el);
-    showLoadMoreBtn();
     isValidForm = true;
+
     return;
   }
 
