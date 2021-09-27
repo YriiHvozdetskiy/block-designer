@@ -43,8 +43,8 @@ function onImageInput() {
 let isValidForm = '';
 
 function formDataCollection() {
-  const headingValue = refs.heading.value;
-  const textValue = refs.text.value;
+  const headingValue = refs.heading.value.trim();
+  const textValue = refs.text.value.trim();
   const linkValue = refs.link.value;
   isValidForm = false;
 
