@@ -29,9 +29,8 @@ function isTextValid(value) {
 }
 
 let uploadedImage = '';
-
+const reader = new FileReader();
 function onImageInput() {
-  const reader = new FileReader();
   console.log('reader', reader);
 
   reader.addEventListener('load', () => {
@@ -139,4 +138,6 @@ const clearForm = () => {
   refs.link.value = '';
   refs.text.value = '';
   refs.imageDisplay.src = ' ';
+  const data = refs.form[0];
+  data.value = null;
 };
