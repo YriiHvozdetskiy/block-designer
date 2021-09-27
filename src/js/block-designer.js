@@ -24,7 +24,7 @@ refs.form.addEventListener('click', onForm);
 refs.imageInput.addEventListener('change', onImageInput);
 
 function isTextValid(value) {
-  const cyrillicPattern = /^[\u0400-\u04FF]/iu;
+  const cyrillicPattern = /^[\u0400-\u04FF]+$/;
   return cyrillicPattern.test(value);
 }
 
