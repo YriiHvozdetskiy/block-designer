@@ -29,8 +29,9 @@ function isTextValid(value) {
 }
 
 let uploadedImage = '';
-const reader = new FileReader();
+
 function onImageInput() {
+  const reader = new FileReader();
   console.log('reader', reader);
 
   reader.addEventListener('load', () => {
@@ -48,40 +49,26 @@ function formDataCollection() {
   const linkValue = refs.link.value;
   isValidForm = false;
 
-  if (headingValue === '')
-    return myError({ text: 'Ведені не всі дані. Поле заговолок пусте', delay: 3500 });
+  if (isEmptyInput(headingValue, linkValue, textValue)) return;
+  if (isValidInput(headingValue, textValue)) return;
 
-  if (linkValue === '')
-    return myError({ text: 'Ведені не всі дані. Поле силка пусте', delay: 3500 });
+  let boxListArrLength = refs.boxList.children.length;
 
-  if (textValue === '')
-    return myError({ text: 'Ведені не всі дані. Поле текст пусте', delay: 3500 });
+  if (boxListArrLength === 10) showLoadMoreBtn();
+  if (isClassHidden(boxListArrLength, headingValue, linkValue, textValue)) return;
+}
 
-  if (!isTextValid(headingValue)) {
-    return myError({
-      text: 'В заголовку підтримуюється лише кирилиця',
-      delay: 3500,
-    });
-  }
-
-  if (!isTextValid(textValue)) {
-    return myError({
-      text: 'в тексті підтримуюється лише кирилиця',
-      delay: 3500,
-    });
-  }
-
-  if (refs.boxList.children.length === 10) showLoadMoreBtn();
-  if (refs.boxList.children.length > 9) {
+function isClassHidden(length, title, link, text) {
+  if (length > 9) {
     const el = `
   <li class="box-item is-hiden">
-     <a href="${linkValue}" class="box-link">
+     <a href="${link}" class="box-link">
         <div class="container-image">
          <img src="${uploadedImage}" alt="">
         </div>
             <ul class="container-list">
-                <li class="container-item">${headingValue}</li>
-                 <li class="container-item">${textValue}</li>
+                <li class="container-item">${title}</li>
+                 <li class="container-item">${text}</li>
              </ul>
      </a>
   </li>
@@ -90,24 +77,52 @@ function formDataCollection() {
     isValidForm = true;
 
     return;
-  }
-
-  const el = `
+  } else {
+    const el = `
   <li class="box-item">
-     <a href="${linkValue}" class="box-link">
+     <a href="${link}" class="box-link">
         <div class="container-image">
          <img src="${uploadedImage}" alt="">
         </div>
             <ul class="container-list">
-                <li class="container-item">${headingValue}</li>
-                 <li class="container-item">${textValue}</li>
+                <li class="container-item">${title}</li>
+                 <li class="container-item">${text}</li>
              </ul>
      </a>
   </li>
 `;
 
-  refs.boxList.insertAdjacentHTML('beforeend', el);
-  isValidForm = true;
+    refs.boxList.insertAdjacentHTML('beforeend', el);
+    isValidForm = true;
+  }
+}
+
+function isEmptyInput(title, link, text) {
+  if (title === '') {
+    return myError({ text: 'Ведені не всі дані. Поле заговолок пусте', delay: 3500 });
+  } else if (link === '') {
+    return myError({ text: 'Ведені не всі дані. Поле силка пусте', delay: 3500 });
+  } else if (text === '') {
+    return myError({ text: 'Ведені не всі дані. Поле текст пусте', delay: 3500 });
+  } else {
+    false;
+  }
+}
+
+function isValidInput(title, text) {
+  if (!isTextValid(title)) {
+    return myError({
+      text: 'В заголовку підтримуюється лише кирилиця',
+      delay: 3500,
+    });
+  } else if (!isTextValid(text)) {
+    return myError({
+      text: 'в тексті підтримуюється лише кирилиця',
+      delay: 3500,
+    });
+  } else {
+    false;
+  }
 }
 
 function onForm(e) {
@@ -117,7 +132,7 @@ function onForm(e) {
 
   refs.loader.classList.add('loading-2');
   formDataCollection();
-  // if (isValidForm) clearForm();
+  if (isValidForm) clearForm();
   refs.loader.classList.remove('loading-2');
 
   const boxItem = document.querySelectorAll('.box-item.is-hiden');
