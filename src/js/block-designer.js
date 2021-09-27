@@ -32,7 +32,6 @@ let uploadedImage = '';
 
 function onImageInput() {
   const reader = new FileReader();
-  console.log('reader', reader);
 
   reader.addEventListener('load', () => {
     uploadedImage = reader.result;
