@@ -117,8 +117,11 @@ function onForm(e) {
 
   refs.loader.classList.add('loading-2');
   formDataCollection();
-  if (isValidForm) clearForm();
+  // if (isValidForm) clearForm();
   refs.loader.classList.remove('loading-2');
+
+  const boxItem = document.querySelectorAll('.box-item.is-hiden');
+  if (boxItem.length > 0) refs.loadMore?.classList.remove('is-hiden');
 }
 
 function showLoadMoreBtn() {
@@ -129,8 +132,9 @@ function showLoadMoreBtn() {
 function onLoadMore() {
   const boxItem = document.querySelectorAll('.box-item.is-hiden');
   for (let i = 0; i < 10; i += 1) {
-    boxItem[i].classList.remove('is-hiden');
+    boxItem[i]?.classList.remove('is-hiden');
   }
+  if (boxItem.length <= 10) refs.loadMore.classList.add('is-hiden');
 }
 
 const clearForm = () => {
