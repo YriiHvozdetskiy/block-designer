@@ -93,7 +93,7 @@ input[type='file'] {
 }
 
 .box-list {
-  width: 870px;
+  width: 930px;
   display: flex;
   flex-wrap: wrap;
   margin: -10px;
@@ -110,7 +110,7 @@ input[type='file'] {
 }
 
 .container-image {
-  width: 250px;
+  width: 270px;
   height: 250px;
   background-color: rgba(grey, 0.3);
 }
@@ -121,6 +121,8 @@ input[type='file'] {
 }
 
 .container-item {
+  width: 250px;
+  word-wrap: break-word;
   color: black;
 }
 
